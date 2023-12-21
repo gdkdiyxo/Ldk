@@ -13,7 +13,7 @@ ENTRYPOINT ["/sbin/tini", "--"]
 # Install app dependencies
 COPY package.json .
 COPY package-lock.json .
-RUN npm ci --only=production
+RUN npm ci
 
 # Make sure to get latest
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
@@ -22,6 +22,4 @@ ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 COPY . .
 
 EXPOSE 80 8080
-WORKDIR "platform"
-ENV NODE_ENV=production
-CMD ["node", "serve.js"]
+CMD ["/bin/sh"]
